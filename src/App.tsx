@@ -1,8 +1,8 @@
-import '../../../Desktop/styles.scss';
-import {useEffect, useState} from '../../../Desktop/react';
+import './styles.scss'
 import {faker} from '@faker-js/faker';
 import MyImage from './avatar.jpg';
 import moment from 'moment';
+import {useEffect, useState} from "react";
 
 // import CustomerTable from "./components/CustomerTable";
 
