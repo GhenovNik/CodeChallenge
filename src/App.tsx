@@ -1,5 +1,5 @@
-import './styles.scss';
-import {useEffect, useState} from 'react';
+import '../../../Desktop/styles.scss';
+import {useEffect, useState} from '../../../Desktop/react';
 import {faker} from '@faker-js/faker';
 import MyImage from './avatar.jpg';
 import moment from 'moment';
@@ -19,9 +19,10 @@ import moment from 'moment';
  *
  */
 function App() {
-    const [data, getData] = useState([]);
+    const [data, setData] = useState<any[]>([]);
 
     useEffect(() => {
+        console.log(1);
         fetchData();
     }, []);
 
@@ -30,7 +31,9 @@ function App() {
             .then((res) => res.json())
 
             .then((response) => {
-                                getData(response);
+                setData(response);
+                setTimeout(() => console.log(data));
+
             });
     };
     //very slow render when trying to load non-existent links, so I commented img part
@@ -50,7 +53,7 @@ function App() {
                 </tr>
                 </thead>
                 {data.map((item, i) => (
-                    <tbody key={i}>
+                    <tbody key={item.id}>
                     <tr className='item'>
                         <td>
                             <div className='item__user'>
@@ -63,8 +66,8 @@ function App() {
                             </div>
                         </td>
                         <td>{item.name}</td>
-                        <td className='item__joined-on'>{moment(item.joinedAt)}</td>
-                        <td>{item.lastLogin}</td>
+                        <td className='item__joined-on'>{moment(item.joinedAt).format('MM/DD/YYYY')}</td>
+                        <td className={'item__last-login'}>{moment(item.lastLogin).format('MM/DD/YYYY HH:mm:ss')}</td>
                         <td className='item__balance'>
                             <div className='item__balance-wrapper'>
                                 <div
@@ -75,7 +78,8 @@ function App() {
                         <td className='item__status'>
                             <div className='item__status-wrapper'>
                                 <span className='item__status-name'>{item.status}</span>
-                                <div className='item__status-badge'></div>
+                                <div
+                                    className={'item__status-badge ' + (item.status === 'Inactive' ? 'inactive' : 'active')}></div>
                             </div>
                         </td>
                         <td>{item.bio}</td>

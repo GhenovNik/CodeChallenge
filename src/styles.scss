@@ -59,6 +59,10 @@ caption {
     background-color: #ebebeb;
   }
 
+  &__last-login {
+    min-width: 13rem;
+  }
+
   &__balance {
     &-negative {
       color: #fc595b;
@@ -83,7 +87,16 @@ caption {
       width: 16px;
       height: 16px;
       border-radius: 50%;
-      background-color: #278157;
+      margin-left: 6px;
+
+      &.active {
+        background-color: #278157;
+      }
+
+      &.inactive {
+        background-color: red;
+        opacity: 1 !important;
+      }
     }
 
     &-name {
